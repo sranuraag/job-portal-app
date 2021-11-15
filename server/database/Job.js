@@ -21,7 +21,7 @@ const db_getJobs = async (user_id) => {
     try {
         logger.debug("Inside db_getJobs.")
 
-        let query = `select id, title, description from jobs where user_id = ${user_id}`;
+        let query = `select id, title, description from jobs where user_id = ${user_id} order by id desc`;
         let result = await executeQuery(query);
         console.log(result);
         return result;
@@ -65,9 +65,43 @@ const db_delete = async (id) => {
     }
 }
 
+const db_getAllJobs = async (user_id) => {
+    try {
+        logger.debug("Inside db_getAllJobs.")
+
+        let query = `select id, title, description from jobs order by id desc`;
+        let result = await executeQuery(query);
+        console.log(result);
+        return result;
+
+    } catch(error) {
+        logger.error("Error in db_getAllJobs.");
+        console.log(error); 
+        throw new Error(); 
+    }
+}
+
+const db_applyJob = async (job_id, user_id) => {
+    try {
+        logger.debug("Inside db_applyJob.")
+
+        let query = `insert into applications (job_id, user_id) values(${job_id}, ${user_id})`;
+        let result = await executeQuery(query);
+        console.log(result);
+        return result;
+
+    } catch(error) {
+        logger.error("Error in db_applyJob.");
+        console.log(error); 
+        throw new Error(); 
+    }
+}
+
 module.exports = {
     db_createJob,
     db_getJobs,
     db_update,
-    db_delete
+    db_delete,
+    db_getAllJobs,
+    db_applyJob
 }

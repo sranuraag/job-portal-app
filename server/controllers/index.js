@@ -1,5 +1,5 @@
 const { createUser, loginUser, getAllUsers, getCurrentUser } = require("./User");
-const { createJob, getJobs, updateJob, deleteJob } = require("./Job");
+const { createJob, getJobs, updateJob, deleteJob, getAllJobs, applyJob } = require("./Job");
 
 module.exports = {
   createUser,
@@ -9,5 +9,7 @@ module.exports = {
   createJob,
   getJobs,
   updateJob,
-  deleteJob
+  deleteJob,
+  getAllJobs,
+  applyJob
 };

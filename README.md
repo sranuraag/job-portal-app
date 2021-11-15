@@ -23,3 +23,8 @@ create table jobs (
 	user_id int references users(id)
 ); 
 
+create table applications (
+	job_id int references jobs(id),
+	user_id int references users(id)
+)
+

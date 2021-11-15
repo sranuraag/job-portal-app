@@ -16,7 +16,7 @@ export default class Employees extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        jobs: []
+      jobs: [],
     };
   }
 
@@ -66,42 +66,42 @@ export default class Employees extends Component {
   ];
 
   componentWillMount = async () => {
-      this.setState({ loading: true }); 
+    this.setState({ loading: true });
 
-      let jobs = []; 
-      let response; 
+    let jobs = [];
+    let response;
 
-      let user_token = `Bearer ${window.localStorage.getItem("user_token")}`;
+    let user_token = `Bearer ${window.localStorage.getItem("user_token")}`;
 
-      let payload = {
-        method: "GET",
-        url: constants.jobs,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: user_token,
-        },
-      };
+    let payload = {
+      method: "GET",
+      url: constants.jobs,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: user_token,
+      },
+    };
 
-      try {
-        response = await axios(payload);
-  
-        if (response.status === 200) {
-          jobs = response.data.data;
-        }
-      } catch (error) {
-        notification.error({
-          message: `Error while fetching Jobs.`,
-          placement: "topright",
-          duration: 3,
-        });
+    try {
+      response = await axios(payload);
+
+      if (response.status === 200) {
+        jobs = response.data.data;
       }
+    } catch (error) {
+      notification.error({
+        message: `Error while fetching Jobs.`,
+        placement: "topright",
+        duration: 3,
+      });
+    }
 
-      this.setState({ jobs, loading: false }); 
+    this.setState({ jobs, loading: false });
   };
 
   handleCreateJob = () => {
     this.props.history.push("/create-job");
-  }
+  };
 
   handleEditJob = (record) => {
     this.props.history.push({
@@ -109,7 +109,7 @@ export default class Employees extends Component {
       state: {
         id: record.id,
         title: record.title,
-        description: record.description
+        description: record.description,
       },
     });
   };
@@ -166,15 +166,16 @@ export default class Employees extends Component {
               </Button>
             </div>
             <div>
-          <Table
-            className="mt-3"
-            columns={this.job_columns}
-            dataSource={this.state.jobs}
-            pagination={true}
-          />
-        </div>
+              <Table
+                className="mt-3"
+                columns={this.job_columns}
+                dataSource={this.state.jobs}
+                pagination={true}
+              />
+            </div>
           </div>
         </div>
+        <Loader loading={this.state.loading} />
       </div>
     );
   }
