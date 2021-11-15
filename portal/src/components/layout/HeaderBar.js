@@ -46,9 +46,9 @@ class HeaderBar extends Component {
               selectedKeys={[this.state.selectedKey]}
               onClick={this.handleMenuClick}
             >
-              <Menu.Item key={"food-entries"}>Employees</Menu.Item>
+              <Menu.Item key={"employees"}>Employees</Menu.Item>
               {this.context.user.role === "Employer" ? (
-                <Menu.Item key={"admin-reports"}>Employers</Menu.Item>
+                <Menu.Item key={"employers"}>Employers</Menu.Item>
               ) : (
                 ""
               )}

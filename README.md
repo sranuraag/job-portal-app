@@ -14,3 +14,12 @@ create table users (
 	role text
 ); 
 
+create sequence job_id_seq increment by 1 start with 10;  
+
+create table jobs (
+	id int default nextval('job_id_seq') primary key,
+	title text, 
+	description text,
+	user_id int references users(id)
+); 
+

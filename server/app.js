@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { UserRouter } = require("./routes");
+const { JobRouter } = require("./routes");
 const { logger } = require("./utils"); 
 
 const cors = require("cors");
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // Routes defined for different resources
 app.use("/users", UserRouter);
+app.use("/jobs", JobRouter);
 
 app.get("/", (req, res) => {
     console.log("Inside /"); 

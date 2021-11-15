@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 
 import axios from "axios";
-import { Input, Button, notification } from "antd";
+import { Input, Button, notification, Select } from "antd";
 
 import constants from "../../constants";
 import Loader from "../utils/Loader";
+
+const { Option } = Select;
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ export default class SignUp extends Component {
       email: "",
       password: "",
       loading: false,
+      role: "Employee"
     };
   }
 
@@ -31,6 +34,10 @@ export default class SignUp extends Component {
     }
   };
 
+  handleRoleChange = (value) => {
+    this.setState({ role: value }); 
+  }
+
   handleSignUp = async () => {
     this.setState({ loading: true });
 
@@ -39,11 +46,12 @@ export default class SignUp extends Component {
       lastName = "",
       email = "",
       password = "",
+      role = "Employee"
     } = this.state;
 
-    if (!(email && password)) {
+    if (!(email && password && role)) {
       notification.error({
-        message: `Email and Password are mandatory.`,
+        message: `Email, Password & Role are mandatory.`,
         placement: "topright",
         duration: 3,
       });
@@ -63,6 +71,7 @@ export default class SignUp extends Component {
         last_name: lastName,
         email,
         password,
+        role
       },
     };
 
@@ -75,7 +84,7 @@ export default class SignUp extends Component {
           placement: "topright",
           duration: 3,
         });
-  
+
         this.props.history.push("/signin");
       }
     } catch (error) {
@@ -142,6 +151,20 @@ export default class SignUp extends Component {
               type={"password"}
             />
           </div>
+          <div className="d-flex mb-4">
+            <label for="role" className="field-label">
+              Role
+            </label>
+            <Select
+              style={{ width: 250 }}
+              placeholder="Role"
+              onChange={this.handleRoleChange}
+              value={this.state.role}
+            >
+              <Option value="Employee">Employee</Option>
+              <Option value="Employer">Employer</Option>
+            </Select>
+          </div>
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
@@ -153,7 +176,9 @@ export default class SignUp extends Component {
             </Button>
           </div>
           <div className="d-flex justify-content-center">
-            <p>Click <Link to='/signin'>here</Link> to Sign In</p>
+            <p>
+              Click <Link to="/signin">here</Link> to Sign In
+            </p>
           </div>
         </div>
         <Loader loading={this.state.loading} />

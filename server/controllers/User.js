@@ -22,7 +22,7 @@ const createUser = async (req, res) => {
 
     if (user.valid) {
       return res
-        .status(200)
+        .status(201)
         .json({ status: "success", jwt: user.jwt, user: user.user });
     } else {
       return res.status(400).json({ error: user.error });

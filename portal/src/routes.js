@@ -7,6 +7,9 @@ import HeaderBar from './components/layout/HeaderBar';
 import PrivateRoute from './PrivateRoute'; 
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import Employees from './components/jobs/Employees';
+import Employers from './components/jobs/Employers';
+import CreateJob from './components/jobs/CreateJob';
 
 const { Header, Content } = Layout;
 
@@ -21,6 +24,9 @@ export default function routes() {
             <Content>
               <Switch>
               <PrivateRoute exact path="/employees" component={Employees} />
+              <PrivateRoute exact path="/employers" component={Employers} />
+              <PrivateRoute exact path="/create-job" component={CreateJob} />
+              <PrivateRoute exact path="/edit-job/:id" component={CreateJob} />
               <Redirect to="/employees" />
               </Switch>
             </Content>
