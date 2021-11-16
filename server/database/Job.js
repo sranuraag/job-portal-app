@@ -7,7 +7,7 @@ const db_createJob = async (title, description, user_id) => {
 
         let query = `insert into jobs (title, description, user_id) values ('${title}','${description}','${user_id}')`;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {
@@ -23,7 +23,7 @@ const db_getJobs = async (user_id) => {
 
         let query = `select id, title, description from jobs where user_id = ${user_id} order by id desc`;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {
@@ -39,7 +39,7 @@ const db_update = async (title, description, id) => {
 
         let query = `update jobs set title = '${title}', description = '${description}' where id = ${id}`;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {
@@ -55,7 +55,7 @@ const db_delete = async (id) => {
 
         let query = `delete from jobs where id = ${id}`;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {
@@ -103,7 +103,7 @@ const db_getAllJobs = async (user_id) => {
         x.id desc
       `;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {
@@ -119,7 +119,7 @@ const db_applyJob = async (job_id, user_id) => {
 
         let query = `insert into applications (job_id, user_id) values(${job_id}, ${user_id})`;
         let result = await executeQuery(query);
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch(error) {

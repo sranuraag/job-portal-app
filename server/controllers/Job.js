@@ -13,7 +13,7 @@ const createJob = async (req, res) => {
   try {
     logger.debug("Inside createJob.");
 
-    console.log(req.body);
+    // console.log(req.body);
 
     let { title, description } = req.body;
 
@@ -27,7 +27,7 @@ const createJob = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in createJob.");
+    logger.error("Error in createJob.");
     console.log(error);
     return res.status(500).json({ error: "Error while creating job." });
   }
@@ -48,7 +48,7 @@ const getJobs = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in getJobs.");
+    logger.error("Error in getJobs.");
     console.log(error);
     return res.status(500).json({ error: "Error while getting jobs." });
   }
@@ -70,7 +70,7 @@ const updateJob = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in updateJob.");
+    logger.error("Error in updateJob.");
     console.log(error);
     return res.status(500).json({ error: "Error while updating jobs." });
   }
@@ -92,7 +92,7 @@ const deleteJob = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in deleteJob.");
+    logger.error("Error in deleteJob.");
     console.log(error);
     return res.status(500).json({ error: "Error while updating jobs." });
   }
@@ -113,7 +113,7 @@ const getAllJobs = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in getAllJobs.");
+    logger.error("Error in getAllJobs.");
     console.log(error);
     return res.status(500).json({ error: "Error while getting jobs." });
   }
@@ -135,7 +135,7 @@ const applyJob = async (req, res) => {
       return res.status(400).json({ error: response.error });
     }
   } catch (error) {
-    logger.debug("Error in applyJob.");
+    logger.error("Error in applyJob.");
     console.log(error);
     return res.status(500).json({ error: "Error while applying for job." });
   }

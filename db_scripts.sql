@@ -22,3 +22,12 @@ create table applications (
 	job_id int references jobs(id) ON DELETE CASCADE,
 	user_id int references users(id)
 ); 
+
+insert into users (id, email, first_name, last_name, role) values 
+(1, 'testemployer01@example.com', 'Test', 'Employer01', 'Employer'); 
+
+insert into jobs (id, title, description, user_id)  values 
+(1, 'Job for Testing 1', 'Job for Testing 1', 1); 
+
+insert into jobs (id, title, description, user_id)  values 
+(2, 'Job for Testing 2', 'Job for Testing 2', 1);
