@@ -77,12 +77,14 @@ const updateJobService = async (title, description, id) => {
   }
 };
 
-const deleteJobService = async (id) => {
+const deleteJobService = async (id, user) => {
   try {
     logger.debug("Inside deleteJobService.");
 
     // Delete Job
     let response = await db_delete(id);
+
+    response = await db_getJobs(user.id); 
 
     return {
       valid: true,
@@ -119,6 +121,8 @@ const applyJobService = async (job_id, user_id) => {
 
     // Apply for Job
     let response = await db_applyJob(job_id, user_id);
+
+    response = await db_getAllJobs(user_id); 
 
     return {
       valid: true,

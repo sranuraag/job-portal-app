@@ -82,8 +82,9 @@ const deleteJob = async (req, res) => {
     logger.debug("Inside deleteJob.");
 
     let id = req.params.id; 
+    let user = req.user; 
 
-    let response = await deleteJobService(id);
+    let response = await deleteJobService(id, user);
 
     if (response.valid) {
       return res.status(200).json({ data: response.data });

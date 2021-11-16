@@ -1,30 +1,46 @@
-# job-portal-app
-Simple replica of a job portal.
+# Job Portal App
 
-1. Create PG Database instance and provide details in .env file
+A simple replica of a real life job portal which allows Employers to post jobs and candidates to apply for those jobs. 
 
-create sequence user_id_seq increment by 1 start with 10;  
+## Features
 
-create table users (
-	id int default nextval('user_id_seq') primary key,
-	email text,
-	password text,
-	first_name text,
-	last_name text, 
-	role text
-); 
+- Two modes of login - Employer or Employee. 
+- Create jobs after logging in as an Employer. 
+- Apply for jobs after logging in as an Employee. 
 
-create sequence job_id_seq increment by 1 start with 10;  
 
-create table jobs (
-	id int default nextval('job_id_seq') primary key,
-	title text, 
-	description text,
-	user_id int references users(id)
-); 
+## Tech
 
-create table applications (
-	job_id int references jobs(id),
-	user_id int references users(id)
-)
+Technologies required to run this app are : 
 
+- React JS
+- Node JS
+- PostgreSQL
+
+## Installation
+
+This repository contains 2 folders - portal (React JS UI) and server (Express JS Server). Follow these steps to run the app : 
+
+React JS UI
+```sh
+Clone this repository
+cd portal 
+npm install
+npm start
+```
+Express JS Server
+```sh
+Clone this repository
+Setup a PostgreSQL instance and provide DB details in server/.env 
+Execute db_scripts.sql in DB
+cd server
+npm install
+npm run devStart
+```
+
+API testing 
+
+```sh
+cd server
+npm test
+```

@@ -115,6 +115,9 @@ export default class Employees extends Component {
   };
 
   handleDeleteJob = async (record) => {
+
+    let jobs = this.state.jobs; 
+
     this.setState({ loading: true });
 
     let payload = {
@@ -135,6 +138,8 @@ export default class Employees extends Component {
           placement: "topright",
           duration: 3,
         });
+
+        jobs = response.data.data; 
       }
     } catch (error) {
       notification.error({
@@ -144,9 +149,7 @@ export default class Employees extends Component {
       });
     }
 
-    window.location.reload();
-
-    this.setState({ loading: false });
+    this.setState({ loading: false, jobs });
   };
 
   render() {

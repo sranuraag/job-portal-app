@@ -32,6 +32,11 @@ export default class Employees extends Component {
       key: "description",
     },
     {
+      title: "No. of Applicants",
+      dataIndex: "cnt",
+      key: "cnt",
+    },
+    {
       title: "Apply",
       key: "apply",
       align: "center",
@@ -41,6 +46,7 @@ export default class Employees extends Component {
             type="primary"
             shape="round"
             size={"small"}
+            disabled={(record.job_id !== -1)}
             onClick={(e) => {this.handleApply(record)}}
           >
             Apply
@@ -85,6 +91,9 @@ export default class Employees extends Component {
   };
 
   handleApply = async (record) => {
+
+    let jobs = this.state.jobs; 
+
     this.setState({ loading: true }); 
 
     let payload = {
@@ -105,6 +114,9 @@ export default class Employees extends Component {
           placement: "topright",
           duration: 3,
         });
+
+        jobs = response.data.data; 
+
       }
     } catch (error) {
       notification.error({
@@ -114,9 +126,8 @@ export default class Employees extends Component {
       });
     }
 
-    window.location.reload();
+    this.setState({ loading: false, jobs });
 
-    this.setState({ loading: false });
   };
 
   render() {

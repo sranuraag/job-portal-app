@@ -69,7 +69,39 @@ const db_getAllJobs = async (user_id) => {
     try {
         logger.debug("Inside db_getAllJobs.")
 
-        let query = `select id, title, description from jobs order by id desc`;
+        let query = `select 
+        x.id as id, 
+        title, 
+        description, 
+        job_id, 
+        coalesce(y.cnt, 0) as cnt 
+      from 
+        (
+          select 
+            a.id as id, 
+            a.title as title, 
+            a.description as description, 
+            coalesce(b.job_id, -1) as job_id 
+          from 
+            jobs a 
+            left join applications b on a.id = b.job_id 
+            and b.user_id = ${user_id}
+        ) x 
+        left join (
+          select 
+            a.id as id, 
+            count(*) as cnt 
+          from 
+            jobs a, 
+            applications b 
+          where 
+            a.id = b.job_id 
+          group by 
+            a.id
+        ) y on x.id = y.id 
+      order by 
+        x.id desc
+      `;
         let result = await executeQuery(query);
         console.log(result);
         return result;
