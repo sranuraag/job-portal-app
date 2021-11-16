@@ -57,10 +57,13 @@ export default class Employees extends Component {
   ];
 
   componentWillMount = async () => {
-    this.setState({ loading: true });
+    this.getJobsData(); 
+  };
 
-    let jobs = [];
-    let response;
+  getJobsData = async () => {
+
+    let jobs = this.state.jobs; 
+    let response; 
 
     let user_token = `Bearer ${window.localStorage.getItem("user_token")}`;
 
@@ -80,15 +83,14 @@ export default class Employees extends Component {
         jobs = response.data.data;
       }
     } catch (error) {
-      notification.error({
-        message: `Error while fetching Jobs.`,
-        placement: "topright",
-        duration: 3,
-      });
+      console.log("Error during API call."); 
     }
 
-    this.setState({ jobs, loading: false });
-  };
+    this.setState({ jobs }); 
+
+    setTimeout(this.getJobsData, 3000); 
+
+  }
 
   handleApply = async (record) => {
 

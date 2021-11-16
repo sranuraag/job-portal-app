@@ -86,6 +86,7 @@ const db_getAllJobs = async (user_id) => {
             jobs a 
             left join applications b on a.id = b.job_id 
             and b.user_id = ${user_id}
+            where a.user_id != 1
         ) x 
         left join (
           select 
@@ -96,6 +97,7 @@ const db_getAllJobs = async (user_id) => {
             applications b 
           where 
             a.id = b.job_id 
+            and a.user_id != 1
           group by 
             a.id
         ) y on x.id = y.id 
